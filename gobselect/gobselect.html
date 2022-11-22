@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="gobselect.css">
+    <script src="jquery-3.6.0.min.js"></script>
+
+   
+
+
+<!--
+    <script type="module" src="___modulo_a.js"></script>
+<script type="module">
+    // esto solo se puede utilizar en módulos, no en scripts regulares como este
+    //import { xxx } from "http://localhost/ra/gobselect/modulo_a.js";
+</script>    
+-->
+</head>
+<body>
+
+<label>Auto</label>
+<input id="cd_auto">
+<button id="searchButton">lupa</button>
+<br>
+<label>val a borrar</label>
+<input id="borrar">
+<button onclick="borrar()">borrar</button>
+<br><br><br>
+<button onclick="append()">append</button>
+<button onclick="prepend()">prepend</button>
+<button onclick="appendArray()">append array</button>
+<button onclick="appendNull()">append null</button>
+
+
+<script type="module">
+//import { GobSelect } from "http://localhost/ra/gobselect/gobselect.js";
+import { GobSelect } from "./gobselect.js";
+window.onload=function(){
+    
+    let auto = document.querySelector('#cd_auto');
+    let searchButton = document.querySelector('#searchButton');
+    let ops = {
+        controlType:'select',
+        searchButton: searchButton,
+        minChars: 0,
+        maxItems:6,
+        tabSelect:true,
+        data:[
+            {v:'01',l:'UNO'},
+            {v:'02',l:'DOS'},
+            {v:'03',l:'TRES'},
+            {v:'04',l:'cuatro'},
+            {v:'05',l:'cinco'},
+            {v:'06',l:'seis'},
+            {v:'07',l:'siete'},
+            {v:'08',l:'ocho'},
+            {v:'09',l:'nueve'},
+            {v:'10',l:'diez'},
+            {v:'11',l:'once'},
+            {v:'12',l:'doce'},
+        ]
+    };
+    auto.gs=new GobSelect(auto, ops);
+    console.log( auto );
+}
+</script>
+<script type="text/javascript">
+    /*
+function xopen(){
+    console.log('ededed');
+    let auto = document.querySelector('#cd_auto');
+    if(!auto.gs.opened){
+        auto.gs.open();
+        $(auto).focus();
+    }else{
+        auto.gs.close();
+    }
+}
+*/
+function append(){
+    let auto = document.querySelector('#cd_auto');
+    auto.gs.addOption( {v:'04',l:'CUATRO'} );
+}
+function prepend(){
+    let auto = document.querySelector('#cd_auto');
+    auto.gs.addOption( {v:'04',l:'CUATRO'} ,1 );
+}
+function appendArray(){
+    let a =[
+            {v:'97',l:'**97**'},
+            {v:'98',l:'**98**'},
+            {v:'99',l:'**99**'},
+        ];
+    let auto = document.querySelector('#cd_auto');
+    auto.gs.addOption( a );
+}
+function appendNull(){
+    let auto = document.querySelector('#cd_auto');
+    auto.gs.addOption();
+}
+function borrar(){
+    let b = document.querySelector('#borrar').value;
+    let auto = document.querySelector('#cd_auto');
+    auto.gs.delOption(b);
+}
+</script>
+</body>
+</html>
